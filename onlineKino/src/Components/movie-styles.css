@@ -1,0 +1,380 @@
+/* ======= ОБЩИЕ СТИЛИ ======= */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  background-color: #f5f5f5;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+/* ======= СТИЛИ ГЛАВНОЙ СТРАНИЦЫ ======= */
+.movie-page {
+  padding: 16px 0;
+  width: 100%;
+}
+
+.movie-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.page-title {
+  text-align: center;
+  margin-bottom: 24px !important;
+  color: #262626;
+  font-weight: 600;
+}
+
+.loading-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.error-message {
+  padding: 24px;
+  text-align: center;
+  color: #f5222d;
+}
+
+/* Стили карточек фильмов */
+.movie-card {
+  height: 100%;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  border-radius: 8px;
+  border: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.movie-card:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+  transform: translateY(-2px);
+}
+
+.poster-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px 8px 0 0;
+}
+
+.movie-poster {
+  height: 320px;
+  width: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.poster-container:hover .movie-poster {
+  transform: scale(1.05);
+}
+
+.poster-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+}
+
+.poster-container:hover .poster-overlay {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.play-icon {
+  font-size: 50px;
+  color: white;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.poster-container:hover .play-icon {
+  opacity: 1;
+}
+
+.rating-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background-color: #faad14;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: bold;
+}
+
+.review-count {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Секция отзывов на главной странице */
+.reviews-container {
+  max-height: 120px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+/* Кастомный скроллбар для секции отзывов */
+.reviews-container::-webkit-scrollbar {
+  width: 4px;
+}
+
+.reviews-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.reviews-container::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.reviews-container::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* ======= СТИЛИ ДЕТАЛЬНОЙ СТРАНИЦЫ ======= */
+/* Компактные стили для детальной страницы */
+.compact-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 16px;
+  background-color: #fff;
+  min-height: 100vh;
+}
+
+.compact-back-btn {
+  margin-bottom: 16px;
+}
+
+.compact-card {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  background-color: #fff;
+}
+
+.compact-poster-container {
+  position: relative;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.compact-poster {
+  width: 100%;
+  display: block;
+  border-radius: 4px;
+}
+
+.compact-rating {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background-color: #faad14;
+  color: white;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.compact-title {
+  margin-top: 0 !important;
+  margin-bottom: 8px !important;
+  color: #262626;
+}
+
+.compact-tags {
+  margin-bottom: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.compact-desc {
+  margin-bottom: 16px !important;
+  color: #595959;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.compact-section-title {
+  margin-top: 0 !important;
+  margin-bottom: 8px !important;
+  font-size: 18px !important;
+  color: #262626;
+}
+
+.compact-player-wrapper {
+  position: relative;
+  padding-top: 56.25%; /* 16:9 соотношение сторон */
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 16px;
+}
+
+.react-player {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.compact-reviews {
+  margin-top: 16px;
+  border-top: 1px solid #f0f0f0;
+  padding-top: 16px;
+}
+
+.compact-review {
+  padding: 8px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.compact-review:last-child {
+  border-bottom: none;
+}
+
+.compact-review p {
+  margin-bottom: 4px !important;
+  color: #595959;
+  font-size: 14px;
+}
+
+.compact-author {
+  text-align: right;
+  font-size: 12px;
+  color: #888;
+  font-style: italic;
+}
+
+.compact-error {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* ======= АДАПТИВНЫЕ СТИЛИ ======= */
+@media (max-width: 576px) {
+  .movie-poster {
+    height: 400px;
+  }
+
+  .compact-container {
+    padding: 8px;
+  }
+
+  .compact-title {
+    font-size: 20px !important;
+    margin-top: 8px !important;
+  }
+
+  .compact-section-title {
+    font-size: 16px !important;
+  }
+
+  .compact-desc {
+    font-size: 13px;
+  }
+
+  .compact-review p {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 768px) {
+  .movie-container {
+    padding: 0 8px;
+  }
+
+  .page-title {
+    font-size: 24px !important;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 992px) {
+  .movie-poster {
+    height: 280px;
+  }
+}
+
+/* ======= ДОПОЛНИТЕЛЬНЫЕ СТИЛИ ДЛЯ УЛУЧШЕНИЯ ИНТЕРФЕЙСА ======= */
+/* Анимации */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.movie-card,
+.compact-card {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Улучшения для фокуса и доступности */
+button:focus,
+a:focus {
+  outline: 2px solid #1890ff;
+  outline-offset: 2px;
+}
+
+/* Улучшения для тегов */
+.ant-tag {
+  margin-right: 4px;
+  margin-bottom: 4px;
+}
+
+/* Улучшения для кнопок */
+.ant-btn-primary {
+  background-color: #1890ff;
+  border-color: #1890ff;
+}
+
+.ant-btn-primary:hover {
+  background-color: #40a9ff;
+  border-color: #40a9ff;
+}
+
+/* Улучшения для карточек */
+.ant-card-body {
+  padding: 16px;
+}
+
+/* Улучшения для списков */
+.ant-list-item {
+  padding: 8px 0;
+}
+
+/* Улучшения для заголовков */
+h1,
+h2,
+h3,
+h4,
+h5 {
+  color: #262626;
+}
+
+/* Улучшения для текста */
+p {
+  color: #595959;
+  margin-bottom: 16px;
+}
