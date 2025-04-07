@@ -16,7 +16,7 @@ const MovieDetail = () => {
     state.movies.list.find((m) => m.id === Number.parseInt(id, 10))
   );
   const reviews = useSelector((state) =>
-    state.reviews.list.filter((r) => r.movieId === Number.parseInt(id, 10))
+    state.reviews.data.filter((r) => r.movieId === Number.parseInt(id, 10))
   );
   const rating = (Math.random() * 5).toFixed(1);
 

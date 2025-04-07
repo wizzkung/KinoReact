@@ -8,8 +8,6 @@ import {
   Space,
   Popconfirm,
   Typography,
-  Spin,
-  Tabs,
 } from "antd";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -133,13 +131,6 @@ const AdminPanel = () => {
     },
   ];
 
-  if (loading)
-    return (
-      <div style={{ textAlign: "center", padding: 50 }}>
-        <Spin tip="Загрузка фильмов..." />
-      </div>
-    );
-
   if (error)
     return (
       <div style={{ color: "red", textAlign: "center", padding: 50 }}>
@@ -150,15 +141,28 @@ const AdminPanel = () => {
   return (
     <div style={{ padding: 20 }}>
       <Title level={2}>Административная панель</Title>
-      <Button type="primary" onClick={handleAdd} style={{ marginBottom: 20 }}>
-        Добавить фильм
-      </Button>
+      <div style={{ marginBottom: 20 }}>
+        <Button type="primary" onClick={handleAdd}>
+          Добавить фильм
+        </Button>
+        {/* Кнопка перехода на страницу диаграмм */}
+        <Button
+          type="primary"
+          onClick={() => navigate("/Diagram")}
+          style={{ marginLeft: 20 }}
+        >
+          Диаграммы
+        </Button>
+        {/* Кнопка перехода на панель отзывов */}
+        <Button
+          type="primary"
+          onClick={() => navigate("/ReviewPanel")}
+          style={{ marginLeft: 20 }}
+        >
+          Отзывы
+        </Button>
+      </div>
       <Table dataSource={movies} columns={columns} rowKey="id" />
-      <Button
-        type="primary"
-        onClick={() => navigate("/ReviewPanel")} // Переход на другой компонент
-        style={{ marginLeft: 20, marginBottom: 20 }}
-      ></Button>
 
       <Modal
         title={editingMovie ? "Редактировать фильм" : "Добавить фильм"}

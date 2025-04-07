@@ -6,7 +6,6 @@ import {
   Card,
   Row,
   Col,
-  Spin,
   List,
   Typography,
   Tag,
@@ -49,13 +48,6 @@ const MainPage = () => {
     dispatch(getReviews());
   }, [dispatch]);
 
-  if (moviesStatus === "loading" || reviewsStatus === "loading")
-    return (
-      <div className="loading-container">
-        <Spin size="large" tip="Загрузка фильмов..." />
-      </div>
-    );
-
   if (moviesError)
     return <div className="error-message">Ошибка: {moviesError}</div>;
   if (reviewsError)
@@ -65,119 +57,121 @@ const MainPage = () => {
   const getRandomRating = () => (Math.random() * 5).toFixed(1);
 
   return (
-    <Layout className="layout">
-      <Content className="movie-page">
-        <div className="movie-container">
-          <Title level={2} className="page-title">
-            Популярные фильмы
-          </Title>
+    <nav className="navbar">
+      <Layout className="layout">
+        <Content className="movie-page">
+          <div className="movie-container">
+            <Title level={2} className="page-title">
+              Online Movies
+            </Title>
 
-          {/* Кнопка для перехода в админ панель */}
-          <div style={{ textAlign: "center", marginBottom: 24 }}>
-            <Button type="primary" onClick={() => navigate("/admin")}>
-              Админ панель
-            </Button>
-          </div>
+            {/* Кнопка для перехода в админ панель */}
+            <div style={{ textAlign: "center", marginBottom: 24 }}>
+              <Button type="primary" onClick={() => navigate("/admin")}>
+                Админ панель
+              </Button>
+            </div>
 
-          <Row gutter={[24, 24]} justify="center">
-            {movies.map((movie) => {
-              // Фильтруем отзывы по movie.id
-              const movieReviews = reviews.filter(
-                (review) => review.movieId === movie.id
-              );
+            <Row gutter={[24, 24]} justify="center">
+              {movies.map((movie) => {
+                // Фильтруем отзывы по movie.id
+                const movieReviews = reviews.filter(
+                  (review) => review.movieId === movie.id
+                );
 
-              // Случайный рейтинг для демонстрации
-              const rating = getRandomRating();
+                // Случайный рейтинг для демонстрации
+                const rating = getRandomRating();
 
-              return (
-                <Col key={movie.id} xs={24} sm={12} md={8} lg={6}>
-                  <Card
-                    hoverable
-                    className="movie-card"
-                    style={{ width: 240 }}
-                    // При клике переходим на страницу деталей
-                    onClick={() => navigate(`/movie/${movie.id}`)}
-                    cover={
-                      <div className="poster-container">
-                        <img
-                          alt={movie.name}
-                          src={movie.posterUrl || "/placeholder.svg"}
-                          className="movie-poster"
-                        />
-                        <div className="poster-overlay">
-                          <PlayCircleOutlined className="play-icon" />
-                        </div>
-                        <div className="rating-badge">
-                          <StarFilled /> {rating}
-                        </div>
-                      </div>
-                    }
-                  >
-                    <Meta
-                      title={
-                        <Title level={4} style={{ marginBottom: 8 }}>
-                          {movie.name}
-                        </Title>
-                      }
-                      description={
-                        <Space size={[0, 8]} wrap>
-                          {movie.genres.split(", ").map((genre, idx) => (
-                            <Tag
-                              key={idx}
-                              color="processing"
-                              style={{ marginBottom: 8 }}
-                            >
-                              {genre}
-                            </Tag>
-                          ))}
-                        </Space>
-                      }
-                    />
-
-                    {movieReviews.length > 0 && (
-                      <>
-                        <Divider style={{ margin: "12px 0" }} />
-                        <div className="reviews-container">
-                          <List
-                            itemLayout="horizontal"
-                            dataSource={movieReviews.slice(0, 2)}
-                            renderItem={(review, index) => (
-                              <List.Item style={{ padding: "8px 0" }}>
-                                <List.Item.Meta
-                                  avatar={
-                                    <Avatar
-                                      src={`https://i.pravatar.cc/150?img=${
-                                        index + 10
-                                      }`}
-                                    />
-                                  }
-                                  title={<Text strong>Пользователь</Text>}
-                                  description={
-                                    <Paragraph
-                                      ellipsis={{ rows: 2 }}
-                                      style={{
-                                        fontSize: "12px",
-                                        color: "rgba(0, 0, 0, 0.65)",
-                                      }}
-                                    >
-                                      {review.comment}
-                                    </Paragraph>
-                                  }
-                                />
-                              </List.Item>
-                            )}
+                return (
+                  <Col key={movie.id} xs={24} sm={12} md={8} lg={6}>
+                    <Card
+                      hoverable
+                      className="movie-card"
+                      style={{ width: 240 }}
+                      // При клике переходим на страницу деталей
+                      onClick={() => navigate(`/movie/${movie.id}`)}
+                      cover={
+                        <div className="poster-container">
+                          <img
+                            alt={movie.name}
+                            src={movie.posterUrl || "/placeholder.svg"}
+                            className="movie-poster"
                           />
+                          <div className="poster-overlay">
+                            <PlayCircleOutlined className="play-icon" />
+                          </div>
+                          <div className="rating-badge">
+                            <StarFilled /> {rating}
+                          </div>
                         </div>
-                      </>
-                    )}
-                  </Card>
-                </Col>
-              );
-            })}
-          </Row>
-        </div>
-      </Content>
-    </Layout>
+                      }
+                    >
+                      <Meta
+                        title={
+                          <Title level={4} style={{ marginBottom: 8 }}>
+                            {movie.name}
+                          </Title>
+                        }
+                        description={
+                          <Space size={[0, 8]} wrap>
+                            {movie.genres.split(", ").map((genre, idx) => (
+                              <Tag
+                                key={idx}
+                                color="processing"
+                                style={{ marginBottom: 8 }}
+                              >
+                                {genre}
+                              </Tag>
+                            ))}
+                          </Space>
+                        }
+                      />
+
+                      {movieReviews.length > 0 && (
+                        <>
+                          <Divider style={{ margin: "12px 0" }} />
+                          <div className="reviews-container">
+                            <List
+                              itemLayout="horizontal"
+                              dataSource={movieReviews.slice(0, 10)}
+                              renderItem={(review, index) => (
+                                <List.Item style={{ padding: "8px 0" }}>
+                                  <List.Item.Meta
+                                    avatar={
+                                      <Avatar
+                                        src={`https://i.pravatar.cc/150?img=${
+                                          index + 10
+                                        }`}
+                                      />
+                                    }
+                                    title={<Text strong>Пользователь</Text>}
+                                    description={
+                                      <Paragraph
+                                        ellipsis={{ rows: 2 }}
+                                        style={{
+                                          fontSize: "12px",
+                                          color: "rgba(0, 0, 0, 0.65)",
+                                        }}
+                                      >
+                                        {review.comment}
+                                      </Paragraph>
+                                    }
+                                  />
+                                </List.Item>
+                              )}
+                            />
+                          </div>
+                        </>
+                      )}
+                    </Card>
+                  </Col>
+                );
+              })}
+            </Row>
+          </div>
+        </Content>
+      </Layout>
+    </nav>
   );
 };
 

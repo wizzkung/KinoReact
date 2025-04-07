@@ -8,11 +8,16 @@ import {
   Input,
   InputNumber,
   DatePicker,
+  Select,
+  Space,
+  Popconfirm,
+  Typography,
 } from "antd";
 import axios from "axios";
 import { getReviews } from "../features/reviewsThunk";
 import dayjs from "dayjs";
 
+const { Title } = Typography;
 const ReviewsPanel = () => {
   const dispatch = useDispatch();
   const reviews = useSelector((state) => state.reviews.data);
@@ -37,8 +42,32 @@ const ReviewsPanel = () => {
     setIsModalOpen(true);
   };
 
+  const handleDownload = async (type) => {
+    try {
+      const response = await axios.get(
+        `https://localhost:7041/api/Reviews/${type}`,
+        {
+          responseType: "blob", // важно для скачивания файлов
+        }
+      );
+
+      const blob = new Blob([response.data], {
+        type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      });
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", `${type}.xlsx`);
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+    } catch (error) {
+      console.error("Download failed:", error);
+    }
+  };
+
   const handleDelete = async (id) => {
-    await axios.delete(`https://localhost:7041/api/Review/Delete/${id}`);
+    await axios.delete(`https://localhost:7041/api/Reviews/Delete/${id}`);
     dispatch(getReviews());
   };
 
@@ -52,11 +81,14 @@ const ReviewsPanel = () => {
 
     if (editingReview) {
       await axios.post(
-        `https://localhost:7041/api/Review/Update/${editingReview.id}`,
+        `https://localhost:7041/api/Reviews/Update/${editingReview.id}`,
         payload
       );
     } else {
-      await axios.post("https://localhost:7041/api/Review/AddReviews", payload);
+      await axios.post(
+        "https://localhost:7041/api/Reviews/AddReviews",
+        payload
+      );
     }
 
     setIsModalOpen(false);
@@ -67,35 +99,61 @@ const ReviewsPanel = () => {
 
   const columns = [
     { title: "ID", dataIndex: "id", key: "id" },
-    { title: "User ID", dataIndex: "userId", key: "userId" },
-    { title: "Movie ID", dataIndex: "movieId", key: "movieId" },
-    { title: "Comment", dataIndex: "comment", key: "comment" },
-    { title: "Rating", dataIndex: "rating", key: "rating" },
-    { title: "Created At", dataIndex: "createdAt", key: "createdAt" },
+    { title: "Пользователь", dataIndex: "userId", key: "userId" },
+    { title: "Фильм", dataIndex: "movieId", key: "movieId" },
+    { title: "Отзыв", dataIndex: "comment", key: "comment" },
+    { title: "Рейтинг", dataIndex: "rating", key: "rating" },
+    { title: "Дата", dataIndex: "createdAt", key: "createdAt" },
     {
-      title: "Actions",
+      title: "Действия",
+      key: "actions",
       render: (_, record) => (
-        <>
-          <Button onClick={() => handleEdit(record)} style={{ marginRight: 8 }}>
-            Edit
+        <Space size="middle">
+          <Button type="link" onClick={() => handleEdit(record)}>
+            Редактировать
           </Button>
-          <Button danger onClick={() => handleDelete(record.id)}>
-            Delete
-          </Button>
-        </>
+          <Popconfirm
+            title="Вы уверены, что хотите удалить фильм?"
+            onConfirm={() => handleDelete(record.id)}
+            okText="Да"
+            cancelText="Нет"
+          >
+            <Button type="link" danger>
+              Удалить
+            </Button>
+          </Popconfirm>
+        </Space>
       ),
     },
   ];
 
   return (
     <>
-      <Button
-        type="primary"
-        onClick={() => setIsModalOpen(true)}
-        style={{ marginBottom: 20 }}
-      >
-        Add Review
-      </Button>
+      <div style={{ padding: 20 }}>
+        <Title level={2}>Панель отзывов</Title>{" "}
+        {/* Заголовок для панели отзывов */}
+        <Button
+          type="primary"
+          onClick={() => setIsModalOpen(true)}
+          style={{ marginBottom: 20 }}
+        >
+          Добавить
+        </Button>
+        <div style={{ marginBottom: 20, display: "flex", gap: 10 }}>
+          <Select
+            placeholder="Выгрузка Excel"
+            onChange={(value) => handleDownload(value)}
+            style={{ width: 200 }}
+          >
+            <Select.Option value="ExcelLastDay">
+              За последний день
+            </Select.Option>
+            <Select.Option value="ExcelLastMonth">
+              За последний месяц
+            </Select.Option>
+          </Select>
+        </div>
+      </div>
 
       <Table dataSource={reviews} columns={columns} rowKey="id" />
 
