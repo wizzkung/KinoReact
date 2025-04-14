@@ -4,7 +4,7 @@ import { getMovies } from "./moviesThunk";
 const moviesSlice = createSlice({
   name: "movies",
   initialState: {
-    list: [],
+    data: [],
     loading: false,
     error: null,
   },
@@ -15,7 +15,7 @@ const moviesSlice = createSlice({
         state.error = null;
       })
       .addCase(getMovies.fulfilled, (state, action) => {
-        state.list = action.payload;
+        state.data = action.payload;
         state.loading = false;
       })
       .addCase(getMovies.rejected, (state, action) => {

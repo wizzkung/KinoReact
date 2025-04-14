@@ -3,6 +3,7 @@ import moviesReducer from "../features/moviesSlice";
 import reviewsReducer from "../features/reviewsSlice";
 import adminsReducer from "../features/adminSlice";
 import usersReducer from "../features/userSlice";
+import authReducer from "../features/authSlice";
 
 export const store = configureStore({
   reducer: {
@@ -10,5 +11,6 @@ export const store = configureStore({
     reviews: reviewsReducer,
     admins: adminsReducer,
     users: usersReducer,
+    auth: authReducer,
   },
 });

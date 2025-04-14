@@ -161,6 +161,13 @@ const AdminPanel = () => {
         >
           Отзывы
         </Button>
+        <Button
+          type="primary"
+          onClick={() => navigate("/UserPanel")}
+          style={{ marginLeft: 20 }}
+        >
+          Пользователи
+        </Button>
       </div>
       <Table dataSource={movies} columns={columns} rowKey="id" />
 

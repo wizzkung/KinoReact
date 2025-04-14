@@ -8,26 +8,27 @@ import AdminPanel from "./Components/AdminPanel";
 import ReviewsPanel from "./Components/ReviewPanel";
 import { Space } from "antd";
 import Diagram from "./Components/Diagram";
+import UserPanel from "./Components/UserPanel";
 
 const App = () => (
-  <div className="space-align-container">
-    <div className="space-align-block">
-      <Space align="center">
-        <Provider store={store}>
-          <Router>
-            <Routes>
-              <Route path="/" element={<MainPage />} />
-              <Route path="/movie/:id" element={<MovieDetail />} />
-              <Route path="/admin" element={<AdminPanel />} />{" "}
-              {/* Новый маршрут */}
-              <Route path="/ReviewPanel" element={<ReviewsPanel />} />
-              <Route path="/Diagram" element={<Diagram />} />
-            </Routes>
-          </Router>
-        </Provider>
-      </Space>
-    </div>
-  </div>
+  // <div className="space-align-container">
+  //   <div className="space-align-block">
+  //     <Space align="center">
+  <Provider store={store}>
+    <Router>
+      <Routes>
+        <Route path="/" element={<MainPage />} />
+        <Route path="/movie/:id" element={<MovieDetail />} />
+        <Route path="/admin" element={<AdminPanel />} />{" "}
+        <Route path="/ReviewPanel" element={<ReviewsPanel />} />
+        <Route path="/Diagram" element={<Diagram />} />
+        <Route path="/UserPanel" element={<UserPanel />} />
+      </Routes>
+    </Router>
+  </Provider>
+  //     </Space>
+  //   </div>
+  // </div>
 );
 
 export default App;
