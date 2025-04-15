@@ -81,7 +81,7 @@ const ReviewsPanel = () => {
 
     if (editingReview) {
       await axios.post(
-        `https://localhost:7041/api/Reviews/Update/${editingReview.id}`,
+        `https://localhost:7041/api/Reviews/Update/${editingReview}`,
         payload
       );
     } else {

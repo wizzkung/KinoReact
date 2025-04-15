@@ -129,10 +129,7 @@ const MainPage = () => {
       <div className="navbar">
         <div className="navbar-container">
           <div className="logo">
-            <img
-              src="src\assets\—Pngtree—movie time lettering neon sign_6531275.png"
-              alt=""
-            />
+            <img src="/images/logo.png" alt="" />
             <span className="logo-text">ONLINE MOVIES</span>
           </div>
           <Space>
