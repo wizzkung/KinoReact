@@ -20,12 +20,12 @@ const AdminPanel = () => {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
-  // Состояния для модального окна и редактируемого фильма
+
   const [modalVisible, setModalVisible] = useState(false);
   const [editingMovie, setEditingMovie] = useState(null);
   const [form] = Form.useForm();
 
-  // Функция для загрузки фильмов
+
   const fetchMovies = async () => {
     setLoading(true);
     try {
@@ -44,7 +44,7 @@ const AdminPanel = () => {
     fetchMovies();
   }, []);
 
-  // Удаление фильма
+
   const handleDelete = async (id) => {
     try {
       await axios.delete(`https://localhost:7041/api/Movie/Delete/${id}`);
@@ -54,21 +54,19 @@ const AdminPanel = () => {
     }
   };
 
-  // Редактирование фильма – открытие формы с заполненными данными
+
   const handleEdit = (movie) => {
     setEditingMovie(movie);
     form.setFieldsValue(movie);
     setModalVisible(true);
   };
 
-  // Добавление нового фильма – открытие пустой формы
   const handleAdd = () => {
     setEditingMovie(null);
     form.resetFields();
     setModalVisible(true);
   };
 
-  // Подтверждение формы – если редактирование, вызываем update, иначе add
   const handleModalOk = async () => {
     try {
       const values = await form.validateFields();
@@ -81,7 +79,6 @@ const AdminPanel = () => {
           }
         );
       } else {
-        // Добавление фильма (POST)
         await axios.post("https://localhost:7041/api/Movie/AddMovie", values);
       }
       setModalVisible(false);
@@ -145,7 +142,6 @@ const AdminPanel = () => {
         <Button type="primary" onClick={handleAdd}>
           Добавить фильм
         </Button>
-        {/* Кнопка перехода на страницу диаграмм */}
         <Button
           type="primary"
           onClick={() => navigate("/Diagram")}
@@ -153,7 +149,6 @@ const AdminPanel = () => {
         >
           Диаграммы
         </Button>
-        {/* Кнопка перехода на панель отзывов */}
         <Button
           type="primary"
           onClick={() => navigate("/ReviewPanel")}

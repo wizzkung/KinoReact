@@ -23,7 +23,7 @@ const MovieDetail = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  // Получение данных из Redux
+ 
   const movie = useSelector((state) =>
     state.movies.data.find((m) => m.id === Number.parseInt(id, 10))
   );
@@ -35,14 +35,13 @@ const MovieDetail = () => {
   const moviesStatus = useSelector((state) => state.movies.status);
   const moviesError = useSelector((state) => state.movies.error);
 
-  // Загрузка фильмов, если данные отсутствуют
   useEffect(() => {
     if (moviesStatus === "idle" || moviesStatus === "failed") {
       dispatch(getMovies());
     }
   }, [dispatch, moviesStatus]);
 
-  // Обработка состояния загрузки
+
   if (moviesStatus === "loading") {
     return (
       <div className="layout">
@@ -53,7 +52,7 @@ const MovieDetail = () => {
     );
   }
 
-  // Обработка ошибки загрузки
+ 
   if (moviesError) {
     return (
       <div className="layout">
@@ -67,7 +66,7 @@ const MovieDetail = () => {
     );
   }
 
-  // Обработка случая, когда фильм не найден
+ 
   if (!movie) {
     return (
       <div
@@ -80,7 +79,6 @@ const MovieDetail = () => {
           padding: 0,
         }}
       >
-        {/* Navigation Bar */}
         <div className="navbar">
           <div className="navbar-container">
             <div className="logo">
@@ -118,8 +116,6 @@ const MovieDetail = () => {
             <Text>Фильм не найден</Text>
           </div>
         </div>
-
-        {/* Footer */}
         <div
           style={{
             backgroundColor: "#ffb300",
@@ -170,7 +166,7 @@ const MovieDetail = () => {
     );
   }
 
-  // Основной рендеринг
+  
   const rating = (Math.random() * 5).toFixed(1);
 
   return (
@@ -184,7 +180,6 @@ const MovieDetail = () => {
         padding: 0,
       }}
     >
-      {/* Navigation Bar */}
       <div className="navbar">
         <div className="navbar-container">
           <div className="logo">
@@ -289,8 +284,6 @@ const MovieDetail = () => {
           </Card>
         </div>
       </div>
-
-      {/* Footer */}
       <div
         style={{
           backgroundColor: "#ffb300",

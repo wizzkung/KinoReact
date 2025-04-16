@@ -1,4 +1,3 @@
-/* ======= СТИЛИ НАВИГАЦИИ И ФУТЕРА ======= */
 body {
   margin: 0;
   padding: 0;
@@ -92,19 +91,18 @@ body {
   color: rgb(255, 0, 0);
 }
 
-/* ======= СТИЛИ ГЛАВНОЙ СТРАНИЦЫ ======= */
 .movie-page {
   padding: 10px 0;
   width: 100%;
   display: flex;
   flex: 1;
-  margin-top: 64px; /* Отступ для фиксированного navbar */
+  margin-top: 64px; 
 }
 
 .movie-container {
   margin: 0 auto;
   padding: 20px 30px;
-  width: 100%; /* Гарантирует полную ширину */
+  width: 100%; 
   max-width: 1200px;
 }
 
@@ -129,7 +127,7 @@ body {
   color: #f5222d;
 }
 
-/* Стили карточек фильмов */
+
 .movie-card {
   height: 100%;
   transition: all 0.3s ease;
@@ -206,14 +204,14 @@ body {
   justify-content: center;
 }
 
-/* Секция отзывов на главной странице */
+
 .reviews-container {
   max-height: 120px;
   overflow-y: auto;
   padding-right: 4px;
 }
 
-/* Кастомный скроллбар для секции отзывов */
+
 .reviews-container::-webkit-scrollbar {
   width: 4px;
 }
@@ -232,8 +230,7 @@ body {
   background: #555;
 }
 
-/* ======= СТИЛИ ДЕТАЛЬНОЙ СТРАНИЦЫ ======= */
-/* Компактные стили для детальной страницы */
+
 .compact-container {
   max-width: 1000px;
   margin: 0 auto;
@@ -307,7 +304,7 @@ body {
 
 .compact-player-wrapper {
   position: relative;
-  padding-top: 56.25%; /* 16:9 соотношение сторон */
+padding-top: 56.25%;  /*  16:9 */
   border-radius: 4px;
   overflow: hidden;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -360,7 +357,7 @@ body {
   max-width: 1000px;
 }
 
-/* ======= АДАПТИВНЫЕ СТИЛИ ======= */
+
 @media (max-width: 576px) {
   .movie-poster {
     height: 400px;
@@ -413,8 +410,7 @@ body {
   }
 }
 
-/* ======= ДОПОЛНИТЕЛЬНЫЕ СТИЛИ ДЛЯ УЛУЧШЕНИЯ ИНТЕРФЕЙСА ======= */
-/* Анимации */
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -429,20 +425,19 @@ body {
   animation: fadeIn 0.3s ease-in-out;
 }
 
-/* Улучшения для фокуса и доступности */
 button:focus,
 a:focus {
   outline: 2px solid #1890ff;
   outline-offset: 2px;
 }
 
-/* Улучшения для тегов */
+
 .ant-tag {
   margin-right: 4px;
   margin-bottom: 4px;
 }
 
-/* Улучшения для кнопок */
+
 .ant-btn-primary {
   background-color: #1890ff;
   border-color: #1890ff;
@@ -453,17 +448,17 @@ a:focus {
   border-color: #40a9ff;
 }
 
-/* Улучшения для карточек */
+
 .ant-card-body {
   padding: 16px;
 }
 
-/* Улучшения для списков */
+
 .ant-list-item {
   padding: 8px 0;
 }
 
-/* Улучшения для заголовков */
+
 h1,
 h2,
 h3,
@@ -472,7 +467,7 @@ h5 {
   color: #262626;
 }
 
-/* Улучшения для текста */
+
 p {
   color: #595959;
   margin-bottom: 16px;

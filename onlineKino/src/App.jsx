@@ -6,14 +6,10 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import MovieDetail from "./Components/MovieDetails";
 import AdminPanel from "./Components/AdminPanel";
 import ReviewsPanel from "./Components/ReviewPanel";
-import { Space } from "antd";
 import Diagram from "./Components/Diagram";
 import UserPanel from "./Components/UserPanel";
 
 const App = () => (
-  // <div className="space-align-container">
-  //   <div className="space-align-block">
-  //     <Space align="center">
   <Provider store={store}>
     <Router>
       <Routes>
@@ -26,9 +22,6 @@ const App = () => (
       </Routes>
     </Router>
   </Provider>
-  //     </Space>
-  //   </div>
-  // </div>
 );
 
 export default App;

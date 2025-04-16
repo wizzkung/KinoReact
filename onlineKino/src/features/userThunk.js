@@ -5,5 +5,5 @@ const url = "https://localhost:7041/api/Users/GetAll";
 
 export const getUsers = createAsyncThunk("Users/getUsers", async () => {
   const response = await axios.get(url);
-  return response.data; // ✅ возвращаем только данные
+  return response.data;
 });

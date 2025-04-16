@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import CanvasJSReact from "@canvasjs/react-charts";
-import { Space } from "antd";
 const CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 const Diagram = () => {
@@ -16,13 +15,11 @@ const Diagram = () => {
         const reviews = reviewsRes.data;
         const movies = moviesRes.data;
 
-        // Создаем словарь для сопоставления id фильма с его именем
         const movieMap = {};
         movies.forEach((movie) => {
           movieMap[movie.id] = movie.name;
         });
 
-        // Группируем отзывы по movieId и считаем сумму и количество оценок
         const ratingsByMovie = {};
         reviews.forEach((review) => {
           const movieId = review.movieId;
@@ -36,7 +33,6 @@ const Diagram = () => {
           }
         });
 
-        // Создаем dataPoints для диаграммы: label = название фильма, y = средний рейтинг
         const points = Object.entries(ratingsByMovie).map(
           ([movieId, { sum, count }]) => {
             const avgRating = sum / count;
@@ -88,7 +84,7 @@ const Diagram = () => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        width: "100%",
+        width: "65%",
         height: "100vh",
         backgroundColor: "#f9f9f9",
       }}

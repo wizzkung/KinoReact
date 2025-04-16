@@ -47,7 +47,7 @@ const ReviewsPanel = () => {
       const response = await axios.get(
         `https://localhost:7041/api/Reviews/${type}`,
         {
-          responseType: "blob", // важно для скачивания файлов
+          responseType: "blob",
         }
       );
 
@@ -131,7 +131,6 @@ const ReviewsPanel = () => {
     <>
       <div style={{ padding: 20 }}>
         <Title level={2}>Панель отзывов</Title>{" "}
-        {/* Заголовок для панели отзывов */}
         <Button
           type="primary"
           onClick={() => setIsModalOpen(true)}

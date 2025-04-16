@@ -20,12 +20,10 @@ const UserPanel = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  // Модалка и форма
   const [modalVisible, setModalVisible] = useState(false);
   const [editingUser, setEditingUser] = useState(null);
   const [form] = Form.useForm();
 
-  // Загрузить всех пользователей
   const fetchUsers = async () => {
     setLoading(true);
     try {
@@ -45,7 +43,6 @@ const UserPanel = () => {
     fetchUsers();
   }, []);
 
-  // Удалить пользователя
   const handleDelete = async (id) => {
     try {
       await axios.delete(`https://localhost:7041/api/Users/Delete/${id}`);
@@ -56,14 +53,12 @@ const UserPanel = () => {
     }
   };
 
-  // Открыть модалку для добавления
   const handleAdd = () => {
     setEditingUser(null);
     form.resetFields();
     setModalVisible(true);
   };
 
-  // Открыть модалку для редактирования
   const handleEdit = (user) => {
     setEditingUser(user);
     form.setFieldsValue({
@@ -73,13 +68,11 @@ const UserPanel = () => {
     setModalVisible(true);
   };
 
-  // Сохранить (add или update)
   const handleModalOk = async () => {
     try {
       const values = await form.validateFields();
 
       if (editingUser) {
-        // UPDATE
         await axios.post(
           `https://localhost:7041/api/Users/Update/${editingUser.id}`,
           {
@@ -90,7 +83,6 @@ const UserPanel = () => {
         );
         message.success("Пользователь обновлён");
       } else {
-        // ADD
         await axios.post("https://localhost:7041/api/Users/AddUser", {
           email: values.email,
           login: values.login,
@@ -113,7 +105,6 @@ const UserPanel = () => {
     }
   };
 
-  // Колонки для AntD Table
   const columns = [
     { title: "ID", dataIndex: "id", key: "id" },
     { title: "Email", dataIndex: "email", key: "email" },
@@ -147,7 +138,6 @@ const UserPanel = () => {
     },
   ];
 
-  // UI
   if (loading) {
     return (
       <div style={{ textAlign: "center", padding: 50 }}>
@@ -198,7 +188,6 @@ const UserPanel = () => {
           >
             <Input />
           </Form.Item>
-          {/* Пароль нужен только при создании */}
           {!editingUser && (
             <Form.Item
               name="password"

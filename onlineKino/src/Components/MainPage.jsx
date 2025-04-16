@@ -48,15 +48,13 @@ const MainPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // локальное состояние модалки и формы
+ 
   const [authVisible, setAuthVisible] = useState(false);
   const [form] = Form.useForm();
 
-  // авторизационные данные из Redux
   const userRole = useSelector(selectCurrentRole);
   const login = useSelector(selectCurrentLogin);
 
-  // фильмы и отзывы из Redux
   const {
     data: movies,
     status: moviesStatus,
@@ -68,13 +66,11 @@ const MainPage = () => {
     error: reviewsError,
   } = useSelector((state) => state.reviews);
 
-  // загрузка данных
   useEffect(() => {
     dispatch(getMovies());
     dispatch(getReviews());
   }, [dispatch, login]);
 
-  // обработчик логина (GET /api/Users/Auth?login=...&password=...)
   const handleLogin = async () => {
     try {
       const values = await form.validateFields();
@@ -85,7 +81,6 @@ const MainPage = () => {
       const data = response.data;
 
       if (data.status === 1) {
-        // сохраняем в Redux: token, роль и логин
         dispatch(
           setCredentials({
             token: data.token,
@@ -105,7 +100,6 @@ const MainPage = () => {
     }
   };
 
-  // пока грузятся — спиннер
   if (moviesStatus === "loading" || reviewsStatus === "loading") {
     return (
       <div className="loading-container">
@@ -113,19 +107,16 @@ const MainPage = () => {
       </div>
     );
   }
-  // ошибки загрузки
   if (moviesError || reviewsError) {
     return (
       <div className="error-message">Ошибка: {moviesError || reviewsError}</div>
     );
   }
 
-  // вспомогательная функция для демонстрационного рейтинга
   const getRandomRating = () => (Math.random() * 5).toFixed(1);
 
   return (
     <div className="layout">
-      {/* Header */}
       <div className="navbar">
         <div className="navbar-container">
           <div className="logo">
@@ -133,7 +124,6 @@ const MainPage = () => {
             <span className="logo-text">ONLINE MOVIES</span>
           </div>
           <Space>
-            {/* Если пользователь авторизован — приветствие */}
             {login ? (
               <Text style={{ color: "#fff", marginRight: 12 }}>
                 Привет, {login}
@@ -147,7 +137,6 @@ const MainPage = () => {
                 Авторизация
               </Button>
             )}
-            {/* Кнопка админ-панели только для роли Admin */}
             {userRole === "Admin" && (
               <Button type="primary" onClick={() => navigate("/admin")}>
                 Админ панель
@@ -157,7 +146,6 @@ const MainPage = () => {
         </div>
       </div>
 
-      {/* Content */}
       <div className="movie-page">
         <div className="movie-container">
           <Row gutter={[24, 24]} justify="center">
@@ -285,7 +273,6 @@ const MainPage = () => {
         </div>
       </div>
 
-      {/* Modal авторизации */}
       <Modal
         title="Авторизация"
         visible={authVisible}
